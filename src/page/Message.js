@@ -207,8 +207,8 @@ class Message extends Component{
                                 avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
                                 title={
                                         <div>
-                                            <a href={'#/talk/' + item.from_uid}>{item.from_username}</a>->
-                                            <a href={'#/talk/' + item.to_uid}>{item.to_username}</a>
+                                            <a target='_blank' rel="noopener noreferrer" href={'#/talk/' + item.from_uid}>{item.from_username}</a>->
+                                            <a target='_blank' rel="noopener noreferrer" href={'#/talk/' + item.to_uid}>{item.to_username}</a>
                                         </div>
                                         }
                                 description={item.message}

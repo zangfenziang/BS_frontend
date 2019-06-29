@@ -119,7 +119,7 @@ class Broadcast extends Component{
                         <List.Item>
                             <List.Item.Meta
                                 avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                                title={<a href={'#/talk/' + item.uid}>{item.username}</a>}
+                                title={<a target='_blank' rel="noopener noreferrer" href={'#/talk/' + item.uid}>{item.username}</a>}
                                 description={item.message}
                             />
                         </List.Item>
