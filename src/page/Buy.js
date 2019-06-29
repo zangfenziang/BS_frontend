@@ -131,6 +131,51 @@ class Buy extends Component{
         })
     }
 
+    pay = async (e, type) => {
+        let token = localStorage.getItem('token');
+        if (!token){
+          token = sessionStorage.getItem('token');
+        }
+        const data = new URLSearchParams();
+        data.append('token', token);
+        data.append('bid', e);
+        data.append('type', type);
+        const json = await fetch(url + '/book/buy', {
+            method: 'POST',
+            body: data
+        })
+        .then(res=>res.json())
+        .catch(err=>{
+            console.error(err);
+            message.error(err.message);
+        })
+        if (!json){
+            return;
+        }
+        if (json.status === -1){
+            message.error(json.message);
+            window.location.href = '#/login';
+        }
+        else if (json.status === 0){
+            message.success('buy book success!');
+            this.fetchBook();
+            setTimeout(() => {
+                this.handleChange(this.state.select);
+            }, 100);
+        }
+        else{
+            message.error(json.message);
+        }
+    }
+
+    payOnline = async (e) => {
+        this.pay(e, 1);
+    }
+
+    payOffline = async (e) => {
+        this.pay(e, 2);
+    }
+
     render(){
         const typeFunc = () => {
             let str = [];
@@ -152,7 +197,10 @@ class Buy extends Component{
                     <Card
                         style={{ width: 300, marginTop: 16 }}
                         key={book.bid}
-                        actions={[<Icon type="pay-circle" />, <Icon type="plus" />, <Icon type="message" />]}
+                        actions={[
+                            <Icon type="pay-circle" onClick={()=>{this.payOnline(book.bid)}} />, 
+                            <Icon type="plus" onClick={()=>{this.payOffline(book.bid)}} />, 
+                            <Icon type="message" />]}
                     >
                         <Meta
                         avatar={

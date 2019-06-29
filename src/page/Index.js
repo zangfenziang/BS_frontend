@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Layout, Menu, Icon, Dropdown } from 'antd';
 import New from './New';
 import Buy from './Buy';
+import Broadcast from './Broadcast';
+import Message from './Message';
 const { Header, Content, Footer, Sider } = Layout;
 
 const logout = (e)=>{
@@ -47,6 +49,12 @@ class Index extends Component{
         }
         else if (this.state.page === '2'){
             return <Buy />
+        }
+        else if (this.state.page === '3'){
+            return <Broadcast />
+        }
+        else if (this.state.page === '4'){
+            return <Message />
         }
         else{
             return 'hello'
