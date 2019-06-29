@@ -40,7 +40,7 @@ class Index extends Component{
             token: token,
         })
         const id = this.props.match.params.uid;
-        if (id !== null){
+        if (id !== undefined){
             this.setState({
                 page: '4',
                 post: id
