@@ -9,10 +9,47 @@ class Message extends Component{
         uid: 0,
         message: [],
         value: '',
-        select: 0
+        select: 0,
+        post: 0,
+        name: 'none'
     }
     async componentWillMount(){
         this.fetchMessage();
+        setInterval(()=>{
+            this.fetchMessage();
+        }, 1000);
+
+        const id = this.props.post;
+        if (!id){
+            return;
+        }
+        let token = localStorage.getItem('token');
+        if (!token){
+            token = sessionStorage.getItem('token');
+        }
+        const data = new URLSearchParams();
+        data.append('token', token);
+        data.append('uid', id);
+        let username = await fetch(url + '/user/find', {
+            method: 'POST',
+            body: data
+        })
+        .then(res=>res.json())
+        .then(json=>{
+            if (json.status === 0){
+                return json.user.username;
+            }
+        })
+        .catch(err=>{
+            console.error(err);
+        })
+        if (username){
+            this.setState({
+                post: id,
+                name: username,
+                select: id
+            })
+        }
     }
 
     fetchMessage = () => {
@@ -133,6 +170,9 @@ class Message extends Component{
                 vec[m.from_uid] = m.from_username;
                 vec[m.to_uid] = m.to_username;
             }
+            if (this.state.post){
+                vec[this.state.post] = null;
+            }
             const res = [];
             for (let key in vec){
                 const value = vec[key];
@@ -145,8 +185,12 @@ class Message extends Component{
         return (
             <div>
                 <div style={{display: 'flex', flexDirection: 'row'}}>
-                    <Select defaultValue="none" onChange={this.selectChange}>
-                        <Option value={0} key={0}>none</Option>
+                    <Select
+                        onChange={this.selectChange}
+                        defaultActiveFirstOption={true}
+                        defaultValue={this.state.post}
+                    >
+                        <Option value={this.state.post} key={0}>{this.state.name}</Option>
                         {option()}
                     </Select>
                     <Input style={{width: '50%', marginLeft: 10}} value={this.state.value} onChange={this.messageChange} />

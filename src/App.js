@@ -13,6 +13,7 @@ class App extends Component {
           <Route exact path='/' component={Index} />
           <Route path='/login' component={Login} />
           <Route path='/register' component={Register} />
+          <Route path='/talk/:uid' component={Index} />
         </HashRouter>
       </div>
     );

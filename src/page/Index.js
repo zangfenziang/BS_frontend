@@ -25,6 +25,7 @@ class Index extends Component{
         type: 0,
         token: "",
         page: '1',
+        post: 0
     }
     componentWillMount(){
         let token = localStorage.getItem('token');
@@ -37,6 +38,13 @@ class Index extends Component{
             type: type,
             token: token,
         })
+        const id = this.props.match.params.uid;
+        if (id !== null){
+            this.setState({
+                page: '4',
+                post: id
+            })
+        }
     }
     onTabClick = (e)=>{
         this.setState({
@@ -54,7 +62,7 @@ class Index extends Component{
             return <Broadcast />
         }
         else if (this.state.page === '4'){
-            return <Message />
+            return <Message post={this.state.post} />
         }
         else{
             return 'hello'

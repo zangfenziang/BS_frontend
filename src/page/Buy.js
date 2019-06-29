@@ -200,7 +200,7 @@ class Buy extends Component{
                         actions={[
                             <Icon type="pay-circle" onClick={()=>{this.payOnline(book.bid)}} />, 
                             <Icon type="plus" onClick={()=>{this.payOffline(book.bid)}} />, 
-                            <Icon type="message" />]}
+                            <Icon type="message" onClick={()=>{window.location.href = '#/talk/' + book.uid}} />]}
                     >
                         <Meta
                         avatar={
