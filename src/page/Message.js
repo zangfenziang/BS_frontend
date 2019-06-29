@@ -15,9 +15,6 @@ class Message extends Component{
     }
     async componentWillMount(){
         this.fetchMessage();
-        setInterval(()=>{
-            this.fetchMessage();
-        }, 1000);
 
         const id = this.props.post;
         if (!id){
@@ -49,6 +46,18 @@ class Message extends Component{
                 name: username,
                 select: id
             })
+        }
+
+
+        this.number = setInterval(()=>{
+            this.fetchMessage();
+        }, 1000);
+    }
+
+    componentWillUnmount(){
+        if (this.number){
+            clearInterval(this.number);
+            this.number = null;
         }
     }
 

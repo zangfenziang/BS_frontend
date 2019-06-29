@@ -4,6 +4,7 @@ import New from './New';
 import Buy from './Buy';
 import Broadcast from './Broadcast';
 import Message from './Message';
+import Storage from './Storage';
 const { Header, Content, Footer, Sider } = Layout;
 
 const logout = (e)=>{
@@ -64,6 +65,9 @@ class Index extends Component{
         else if (this.state.page === '4'){
             return <Message post={this.state.post} />
         }
+        else if (this.state.page === '5'){
+            return <Storage />
+        }
         else{
             return 'hello'
         }
@@ -104,6 +108,10 @@ class Index extends Component{
                 <Menu.Item key="4">
                     <Icon type="message" />
                     <span className="nav-text">message</span>
+                </Menu.Item>
+                <Menu.Item key="5">
+                    <Icon type="carry-out" />
+                    <span className="nav-text">storage</span>
                 </Menu.Item>
               </Menu>
             </Sider>
