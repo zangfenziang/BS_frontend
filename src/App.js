@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
-import {Button} from 'antd'
+import { HashRouter, Route } from "react-router-dom";
+import Index from './page/Index';
+import Login from './page/Login';
+import Register from './page/Register';
 import './App.css';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Button type="primary">Button</Button>
+        <HashRouter>
+          <Route exact path='/' component={Index} />
+          <Route path='/login' component={Login} />
+          <Route path='/register' component={Register} />
+        </HashRouter>
       </div>
     );
   }
