@@ -15,7 +15,7 @@ class NormalRegisterForm extends React.Component {
     const { getFieldDecorator } = this.props.form;
     return (
       <Form onSubmit={this.handleSubmit} className="login-form">
-        <div style={{ textAlign: 'center', fontSize: 24, margin: '12px 0' }}><strong>Welcome GoBook</strong></div>
+        <div className='logo'></div>
         <Form.Item>
           {getFieldDecorator('username', {
             rules: [{ required: true, message: 'Please input your username!' }],

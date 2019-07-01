@@ -80,7 +80,7 @@ class Message extends Component{
                 window.location.href = '#/login';
             }
             else if (json.status === 0){
-                const message = json.message;
+                const json_message = json.message;
                 const getUsername = async (uid) => {
                     const data = new URLSearchParams();
                     data.append('token', token);
@@ -103,13 +103,13 @@ class Message extends Component{
                     }
                     return username;
                 }
-                for (let i in message){
-                    const m = message[i];
+                for (let i = 0; i < json_message.length; ++i){
+                    const m = json_message[i];
                     m.from_username = await getUsername(m.from_uid);
                     m.to_username = await getUsername(m.to_uid);
                 }
                 this.setState({
-                    message: message.reverse()
+                    message: json_message.reverse()
                 })
             }
             else{

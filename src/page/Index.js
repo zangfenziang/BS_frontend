@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Layout, Menu, Icon, Dropdown } from 'antd';
+import { Layout, Menu, Icon, message, Button } from 'antd';
 import New from './New';
 import Buy from './Buy';
 import Broadcast from './Broadcast';
 import Message from './Message';
 import Storage from './Storage';
+import {url} from '../config';
 const { Header, Content, Footer, Sider } = Layout;
 
 const logout = (e)=>{
@@ -13,20 +14,13 @@ const logout = (e)=>{
     window.location.href = '#/login';
 }
 
-const menu = (
-    <Menu onClick={logout}>
-      <Menu.Item key="0">
-        Logout
-      </Menu.Item>
-    </Menu>
-);
-
 class Index extends Component{
     state = {
         type: 0,
         token: "",
         page: '1',
-        post: 0
+        post: 0,
+        username: ''
     }
     componentWillMount(){
         let token = localStorage.getItem('token');
@@ -46,6 +40,25 @@ class Index extends Component{
                 post: id
             })
         }
+
+        const data = new URLSearchParams();
+        data.append('token', token);
+        fetch(url + '/user/find', {
+            method: 'POST',
+            body: data
+        })
+        .then(res=>res.json())
+        .then(json=>{
+            if (json.status !== 0){
+                message.error(json.message);
+                window.location.href = '#/login';
+            }
+            else{
+                this.setState({
+                    username: json.user.username
+                })
+            }
+        })
     }
     onTabClick = (e)=>{
         this.setState({
@@ -60,13 +73,13 @@ class Index extends Component{
             return <Buy />
         }
         else if (this.state.page === '3'){
-            return <Broadcast />
+            return <Storage />
         }
         else if (this.state.page === '4'){
             return <Message post={this.state.post} />
         }
         else if (this.state.page === '5'){
-            return <Storage />
+            return <Broadcast />
         }
         else{
             return 'hello'
@@ -102,31 +115,30 @@ class Index extends Component{
                     <span className="nav-text">buy</span>
                 </Menu.Item>
                 <Menu.Item key="3">
-                    <Icon type="usergroup-add" />
-                    <span className="nav-text">broadcast</span>
+                    <Icon type="carry-out" />
+                    <span className="nav-text">storage</span>
                 </Menu.Item>
                 <Menu.Item key="4">
                     <Icon type="message" />
                     <span className="nav-text">message</span>
                 </Menu.Item>
                 <Menu.Item key="5">
-                    <Icon type="carry-out" />
-                    <span className="nav-text">storage</span>
+                    <Icon type="usergroup-add" />
+                    <span className="nav-text">broadcast</span>
                 </Menu.Item>
               </Menu>
             </Sider>
             <Layout>
                 <Header style={{ background: '#fff', padding: 0 }}>
-                    <div style={{float: 'right', paddingRight: 20, cursor: 'pointer'}}>
-                        <Dropdown overlay={menu}>
-                            <Icon type="user" />
-                        </Dropdown>
+                    <div style={{float: 'right', paddingRight: 20}}>
+                        {this.state.username}
+                        <Button size='small' onClick={logout} style={{marginLeft: 5}}>Logout</Button>
                     </div>
                 </Header>
                 <Content style={{ margin: '24px 16px 0' }}>
                     <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>{this.page()}</div>
                 </Content>
-                <Footer style={{ textAlign: 'center' }}>GoBook ©2019 Created by zangfenziang</Footer>
+                <Footer style={{ textAlign: 'center' }}>BookStorage ©2019 Created by Shumi</Footer>
             </Layout>
           </Layout>
         );
