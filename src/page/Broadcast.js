@@ -118,8 +118,13 @@ class Broadcast extends Component{
                     renderItem={item=>(
                         <List.Item>
                             <List.Item.Meta
-                                avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                                title={<a target='_blank' rel="noopener noreferrer" href={'#/talk/' + item.uid}>{item.username}</a>}
+                                avatar={<Avatar style={{cursor: 'pointer'}} src="http://q1.qlogo.cn/g?b=qq&nk=751495224&s=640" onClick={()=>{window.open('#/talk/' + item.uid)}} />}
+                                title={
+                                    <div>
+                                            <a target='_blank' rel="noopener noreferrer" href={'#/talk/' + item.uid}>
+                                                {item.username}
+                                            </a>
+                                        </div>}
                                 description={item.message}
                             />
                         </List.Item>

@@ -208,7 +208,7 @@ class NormalNewForm extends React.Component {
         >
           <Input onChange={this.typenameChange} value={this.state.typename} />
         </Modal>
-        <Form.Item label='book name:'>
+        <Form.Item label='Name:'>
           {getFieldDecorator('name', {
             rules: [{ required: true, message: 'Please input your bookname!' }],
           })(
@@ -218,7 +218,7 @@ class NormalNewForm extends React.Component {
             />,
           )}
         </Form.Item>
-        <Form.Item label='cover:'>
+        <Form.Item label='Cover:'>
           <Upload {...props}>
             <Button>
               <Icon type="upload" /> Click to Upload
@@ -226,13 +226,7 @@ class NormalNewForm extends React.Component {
             <div>{this.state.file}</div> 
           </Upload>
         </Form.Item>
-        <Form.Item label='type:'>
-          <Select defaultValue="none" style={{ width: 120 }} onChange={this.handleChange}>
-            {typeFunc()}
-          </Select>
-          <Button onClick={this.addType} style={{marginLeft: 10}} type="primary" shape="circle" icon="plus" />
-        </Form.Item>
-        <Form.Item label='origin price:'>
+        <Form.Item label='Origin Price:'>
           {getFieldDecorator('origin', {
             rules: [{ required: true, message: 'Please input origin price!' }],
           })(
@@ -241,7 +235,7 @@ class NormalNewForm extends React.Component {
             />,
           )}
         </Form.Item>
-        <Form.Item label='price:'>
+        <Form.Item label='Price:'>
           {getFieldDecorator('price', {
             rules: [{ required: true, message: 'Please input price!' }],
           })(
@@ -250,7 +244,7 @@ class NormalNewForm extends React.Component {
             />,
           )}
         </Form.Item>
-        <Form.Item label='description:'>
+        <Form.Item label='Description:'>
           {getFieldDecorator('description', {
             rules: [{ required: true, message: 'Please input description!' }],
           })(
@@ -258,6 +252,12 @@ class NormalNewForm extends React.Component {
               placeholder="Description"
             />,
           )}
+        </Form.Item>
+        <Form.Item label='Type:'>
+          <Select defaultValue="none" style={{ width: 120 }} onChange={this.handleChange}>
+            {typeFunc()}
+          </Select>
+          <Button onClick={this.addType} style={{marginLeft: 10}} type="primary" shape="circle" icon="plus" />
         </Form.Item>
         <Form.Item label='link:'>
           {getFieldDecorator('link', {
@@ -271,7 +271,7 @@ class NormalNewForm extends React.Component {
         </Form.Item>
         <Form.Item {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">
-            New Book
+            New
           </Button>
         </Form.Item>
       </Form>

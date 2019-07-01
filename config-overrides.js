@@ -10,7 +10,7 @@ module.exports = override(
         javascriptEnabled: true,
         modifyVars: { 
             '@primary-color': '#546e7a',
-            '@layout-header-background': '#263238'
+            '@layout-header-background': '#263238',
         },
     }),
 );

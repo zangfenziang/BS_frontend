@@ -108,23 +108,23 @@ class Index extends Component{
               <Menu theme="dark" mode="inline" onClick={this.onTabClick} defaultSelectedKeys={[this.state.page]}>
                 <Menu.Item key="1">
                     <Icon type="form" />
-                    <span className="nav-text">new</span>
+                    <span className="nav-text">New Book</span>
                 </Menu.Item>
                 <Menu.Item key="2">
                     <Icon type="medicine-box" />
-                    <span className="nav-text">buy</span>
+                    <span className="nav-text">Buy Book</span>
                 </Menu.Item>
                 <Menu.Item key="3">
                     <Icon type="carry-out" />
-                    <span className="nav-text">storage</span>
+                    <span className="nav-text">Storage</span>
                 </Menu.Item>
                 <Menu.Item key="4">
                     <Icon type="message" />
-                    <span className="nav-text">message</span>
+                    <span className="nav-text">Message</span>
                 </Menu.Item>
                 <Menu.Item key="5">
                     <Icon type="usergroup-add" />
-                    <span className="nav-text">broadcast</span>
+                    <span className="nav-text">Need</span>
                 </Menu.Item>
               </Menu>
             </Sider>

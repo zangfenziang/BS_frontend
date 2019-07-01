@@ -213,7 +213,7 @@ class Message extends Component{
                     renderItem={item=>(
                         <List.Item>
                             <List.Item.Meta
-                                avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+                                avatar={<Avatar src="http://q1.qlogo.cn/g?b=qq&nk=751495224&s=640" />}
                                 title={
                                         <div>
                                             <a target='_blank' rel="noopener noreferrer" href={'#/talk/' + item.from_uid}>{item.from_username}</a>->
